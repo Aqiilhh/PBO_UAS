@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registrasi</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --text-dark: #00aaff;
+      --text-light: #66ccff;
+      --blue: #00aaff;
+      --blue-dark: #0088cc;
+      --blue-light: #1e1e1e;
+      --white: #121212;
+      --gray-light: #1f1f1f;
+      --border-radius: 14px;
+      --box-shadow: 0 10px 25px rgba(0, 170, 255, 0.15);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--blue-light) 0%, var(--white) 100%);
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .register-card {
+      background: #1c1c1c;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 500px;
+      transition: var(--transition);
+    }
+
+    .register-card:hover {
+      box-shadow: 0 15px 30px rgba(0, 170, 255, 0.2);
+    }
+
+    .logo {
+      margin-bottom: 1.5rem;
+      color: var(--blue);
+      font-size: 2.5rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text-dark);
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      font-weight: 400;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    .input-group {
+      position: relative;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 1rem 1rem 1rem 3rem;
+      font-size: 1rem;
+      border: 1px solid #444;
+      border-radius: var(--border-radius);
+      background-color: #2c2c2c;
+      color: var(--text-dark);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .input-field::placeholder {
+      color: var(--text-light);
+    }
+
+    .input-field:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(0, 170, 255, 0.2);
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-light);
+    }
+
+    .submit-button {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.1rem;
+      background-color: var(--blue);
+      color: white;
+      border: none;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: var(--transition);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .submit-button:hover {
+      background-color: var(--blue-dark);
+      transform: translateY(-2px);
+    }
+
+    .submit-button:active {
+      transform: translateY(0);
+    }
+
+    .link-group {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .link-group a {
+      color: var(--blue);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .link-group a:hover {
+      text-decoration: underline;
+      color: var(--blue-dark);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: var(--text-light);
+      font-size: 0.875rem;
+      background-color: #1c1c1c;
+    }
+
+    @media (max-width: 576px) {
+      .register-card {
+        padding: 2rem 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1rem;
+      }
+
+      .input-field {
+        padding: 0.9rem 0.9rem 0.9rem 2.8rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .register-card {
+        padding: 1.5rem 1rem;
+      }
+
+      .logo {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="register-card">
+      <div class="logo">
+        <i class="fas fa-user-graduate"></i>
+      </div>
+      <h1>Daftar Akun</h1>
+      <h2>Silakan isi data di bawah ini</h2>
+
+      <form th:action="@{/register}" method="post">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <div class="input-group">
+            <i class="fas fa-user input-icon"></i>
+            <input class="input-field" type="text" id="username" name="username" placeholder="Masukkan username" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-group">
+            <i class="fas fa-lock input-icon"></i>
+            <input class="input-field" type="password" id="password" name="password" placeholder="Buat password" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="nama">Nama Lengkap</label>
+          <div class="input-group">
+            <i class="fas fa-id-card input-icon"></i>
+            <input class="input-field" type="text" id="nama" name="nama" placeholder="Nama lengkap sesuai KTP" required />
+          </div>
+        </div>
+
+        <button type="submit" class="submit-button">
+          <i class="fas fa-user-plus"></i> Daftar Sekarang
+        </button>
+      </form>
+
+      <div class="link-group">
+        <p>Sudah punya akun? <a th:href="@{/login}"><i class="fas fa-sign-in-alt"></i> Login di sini</a></p>
+      </div>
+    </div>
+  </main>
+
+  <footer>&copy; 2025 Xaver. All rights reserved.</footer>
+</body>
+</html>
